@@ -33,6 +33,7 @@ def validate_username(username: str) -> bool:
     - no alphanumeric characters
     """
 def save_user_info(username: str, password: str) -> None:
+    database_path = "./Database/users.csv"
     """
     Save the user's information to a file.
     hints:
