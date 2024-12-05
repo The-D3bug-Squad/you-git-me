@@ -36,7 +36,7 @@ def validate_password(password: str) -> bool:
     special_chars = False
     
     if len(password) >= 8:
-        return True
+        length = True
     for i in password:
         if i.isdigit():
             digits = True
@@ -60,13 +60,17 @@ def validate_username(username: str) -> bool:
     """
     length = False
     no_alnum = False
+    no_special_chars = True
     
     if len(username) >= 3:
         length = True
     if username is not username.isalnum():
         no_alnum = True
+    for i in username:
+        if i in string.punctuation:
+            no_special_chars = False
 
-    if length and no_alnum:
+    if length and no_alnum and no_special_chars:
         return True
     return False
     
@@ -80,23 +84,23 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-    with open(database_path, mode = "a", newline = "") as f:
-        writer = csv.writer(f, delimiter = ",")
-
-        username = input("Please enter your username: ")
-        password = input("Please enter your password: ")
-
-        writer.writerow([username, password])
+    with open(database_path, "a+", newline="") as f:
+        file.seek(0)
         
-    with open(database_path, mode = "r") as f:
-        reader = csv.reader(f, delimiter = ",")
-
+        reader = csv.reader(f)
         for row in reader:
             if row == [username, password]:
                 return "You're already logged in!"
-            
+                
+        writer = csv.writer(f) 
+        writer.writerow([username, password])
 
-
+        for row in reader:
+            users = row[0]
+        if username in users:
+           return username
+                
+        
 if __name__ == "__main__":
     #use to test the functions
     pass
