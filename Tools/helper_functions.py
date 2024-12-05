@@ -85,21 +85,15 @@ def save_user_info(username: str, password: str) -> None:
     - ensure theres no duplicates
     """
     with open(database_path, "a+", newline="") as f:
-        file.seek(0)
+        f.seek(0)
         
         reader = csv.reader(f)
         for row in reader:
             if row == [username, password]:
-                return "You're already logged in!"
+                print("Username already exists")
                 
         writer = csv.writer(f) 
         writer.writerow([username, password])
-
-        for row in reader:
-            users = row[0]
-        if username in users:
-           return username
-                
         
 if __name__ == "__main__":
     #use to test the functions
