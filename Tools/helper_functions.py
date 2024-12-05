@@ -57,12 +57,12 @@ def validate_username(username: str) -> bool:
     - no alphanumeric characters
     """
     length = False
-    no_alnum = True
+    no_alnum = False
     
     if len(username) >= 3:
         length = True
-    if username.isalnum():
-        no_alnum = False
+    if username not in username.isalnum():
+        no_alnum = True
 
     if length and no_alnum:
         return True
