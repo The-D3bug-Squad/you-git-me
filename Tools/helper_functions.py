@@ -10,7 +10,7 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-   return pwinput.pwinput(prompt)
+    return pwinput.pwinput(prompt)
 
 password = get_password("Enter your password: ")
     
