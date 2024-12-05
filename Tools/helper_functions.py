@@ -1,6 +1,6 @@
 import pwinput
 from termcolor import colored
-
+import string
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
 
@@ -8,12 +8,15 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    pass
+    password=input(prompt)
+    return password
 
 def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
+    username =input(prompt)
+    return username 
 
 def validate_password(password: str) -> bool:
     """
@@ -25,6 +28,38 @@ def validate_password(password: str) -> bool:
     - at least one digit
     - at least one special character
     """
+    uppercase=0
+    lowercase=0
+    digit=0
+    special=0
+
+    if len(password)<8:
+        return False
+    
+    for i in password:
+        if i.isupper():
+            uppercase += 1
+    if uppercase==0:
+        return False
+        
+    for i in password:
+        if i.islower():
+            lowercase += 1
+    if lowercase==0:
+        return False
+        
+    for i in password:
+        if i.isdigit():
+            digit+=1
+    if digit==0:
+        return False
+    
+    for i in password:
+        if i in string.punctuation:
+            special+=1
+    if special==0:
+        return False
+    return True  
 
 def validate_username(username: str) -> bool:
     """
@@ -33,6 +68,16 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
+    count=0
+    if len(username)>3 :
+        for i in username:
+            if i.isalnum():
+                return False
+        else:
+            return True
+    else:
+        return False
+    
 def save_user_info(username: str, password: str) -> None:
     database_path = "./Database/users.csv"
     """
