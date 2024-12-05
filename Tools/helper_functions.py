@@ -84,7 +84,7 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-    with open(database_path, "a+", newline="") as f:
+    with open("users_data.csv", "a") as f:
         f.seek(0)
         
         reader = csv.reader(f)
