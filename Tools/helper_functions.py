@@ -86,7 +86,7 @@ def save_user_info(username: str, password: str) -> None:
 
         writer.writerow([username, password])
         
-    with open(database_path, mode = "a") as f:
+    with open(database_path, mode = "r") as f:
         reader = csv.reader(f, delimiter = ",")
 
         for row in reader:
