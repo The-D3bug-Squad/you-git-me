@@ -77,8 +77,21 @@ def validate_username(username: str) -> bool:
     else:
         return False
     
+database_path = "./Database/users.csv"
+
+def get_reader():
+    try:
+        with open(database_path, "r") as f:
+            reader = csv.reader(f)
+            return list(reader)
+    except Exception as e:
+        error = colored(f"Failed to get data from database", "red")
+        print(error)
+        return
+
+reader = get_reader()
+
 def save_user_info(username: str, password: str) -> None:
-    database_path = "./Database/users.csv"
     """
     Save the user's information to a file.
     hints:
@@ -87,20 +100,20 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
+    for line in reader:
+        if [username,password] == line:
+            message = colored("Username and password already exists", "red")
+            print(message)
+            return
+        
     try:
         with open(database_path,"a") as file:
-            with open(database_path,"r") as f:
-                reader = csv.reader(f)
-                for line in reader:
-                    if [username,password] == line:
-                        message = colored("Username and password already exists", "red")
-                        print(message)
-                info = f"{username},{password}"
-                file.write(f"{str(info)}\n")
-                result = colored("You have been successfully added to the database", "green")
-                print(result)
-    except:
-        error = colored("Failed to add to database", "red")
+            info = f"{username},{password}"
+            file.write(f"{info}\n")
+            result = colored("You have been successfully added to the database", "green")
+            print(result)
+    except Exception as e:
+        error = colored(f"Failed to add to database : {e}", "red")
         print(error)
 
 if __name__ == "__main__":

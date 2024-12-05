@@ -16,8 +16,11 @@ def main():
             print("Adding you to database...")
             time.sleep(1)
             save_user_info(username,password)
+        else:
+            error2 = colored("Invalid username", "red")
+            print(error2)
     else:
-        error = colored("Failed to add to database", "red")
+        error = colored("Invalid password", "red")
         print(error)
 
 if __name__ == "__main__":
