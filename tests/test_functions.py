@@ -3,11 +3,11 @@ from unittest.mock import patch
 import os
 
 # Assuming your functions are defined in a file named `user_functions.py`
-from Tools.helper_functions import get_password, get_username, validate_password, validate_username, save_user_info
+from Tools.helper_functions import get_password, get_username, validate_password, validate_username, save_user_info 
 
 class TestUserFunctions(unittest.TestCase):
 
-    @patch("helper_functions.pwinput.pwinput", return_value="securePassword123!")
+    @patch("Tools.helper_functions.pwinput.pwinput", return_value="securePassword123!")
     def test_get_password(self, mock_input):
         result = get_password("Enter your password: ")
         self.assertEqual(result, "securePassword123!")

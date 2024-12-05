@@ -8,7 +8,7 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    password=input(prompt)
+    password=pwinput.pwinput(prompt)
     return password
 
 def get_username(prompt: str) -> str:
@@ -69,14 +69,15 @@ def validate_username(username: str) -> bool:
     - no alphanumeric characters
     """
     count=0
-    if len(username)>3 :
-        for i in username:
-            if i.isalnum():
-                return False
-        else:
-            return True
-    else:
+    if len(username)<=3 :
         return False
+        # for i in username:
+    elif not username.isalnum():
+        return False
+        # else:
+        #     return True
+    else:
+        return True
     
 def save_user_info(username: str, password: str) -> None:
     database_path = "./Database/users.csv"
@@ -92,4 +93,4 @@ def save_user_info(username: str, password: str) -> None:
 
 if __name__ == "__main__":
     #use to test the functions
-    pass
+    print(validate_username("user2"))
