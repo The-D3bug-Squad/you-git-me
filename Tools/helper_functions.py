@@ -61,7 +61,7 @@ def validate_username(username: str) -> bool:
     
     if len(username) >= 3:
         length = True
-    if username not in username.isalnum():
+    if username is not username.isalnum():
         no_alnum = True
 
     if length and no_alnum:
