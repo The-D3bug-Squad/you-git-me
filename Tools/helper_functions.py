@@ -1,5 +1,5 @@
 import pwinput
-from termcolor import colored
+from termcolor import colored, cprint
 import csv
 
 # try and accept accordingly to make a program that will not crash
@@ -76,6 +76,7 @@ def validate_username(username: str) -> bool:
         return True
     else:
         return False
+    
 def save_user_info(username: str, password: str) -> None:
     database_path = "./Database/users.csv"
     """
@@ -92,12 +93,15 @@ def save_user_info(username: str, password: str) -> None:
                 reader = csv.reader(f)
                 for line in reader:
                     if [username,password] == line:
-                        return "Username and password already exists"
+                        message = colored("Username and password already exists", "red")
+                        print(message)
                 info = f"{username},{password}"
                 file.write(f"{str(info)}\n")
-                return "You have been successfully added to the database"
+                result = colored("You have been successfully added to the database", "green")
+                print(result)
     except:
-        return "Failed to add to database"
+        error = colored("Failed to add to database", "red")
+        print(error)
 
 if __name__ == "__main__":
     #use to test the functions

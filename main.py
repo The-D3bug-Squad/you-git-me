@@ -1,5 +1,6 @@
 from Tools.helper_functions import get_password, get_username, validate_password, validate_username, save_user_info
 import time
+from termcolor import colored, cprint
 
 def main():
     #implement logic for the program to work correctly use given functions you implemented
@@ -14,12 +15,10 @@ def main():
         if validate_username(username):
             print("Adding you to database...")
             time.sleep(1)
-            print(save_user_info(username,password))
+            save_user_info(username,password)
     else:
-        print("Invalid Password")
-    print()
-
-
+        error = colored("Failed to add to database", "red")
+        print(error)
 
 if __name__ == "__main__":
     main()
