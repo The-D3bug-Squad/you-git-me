@@ -7,7 +7,7 @@ from Tools.helper_functions import get_password, get_username, validate_password
 
 class TestUserFunctions(unittest.TestCase):
 
-    @patch("helper_functions.pwinput.pwinput", return_value="securePassword123!")
+    @patch("pwinput.pwinput", return_value="securePassword123!")
     def test_get_password(self, mock_input):
         result = get_password("Enter your password: ")
         self.assertEqual(result, "securePassword123!")
