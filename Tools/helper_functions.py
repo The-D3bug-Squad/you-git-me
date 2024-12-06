@@ -15,6 +15,8 @@ def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
+    username = input(prompt)
+    return username
 
 def validate_password(password: str) -> bool:
     """
