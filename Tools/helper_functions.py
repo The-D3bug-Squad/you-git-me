@@ -1,5 +1,6 @@
 import pwinput
 from termcolor import colored
+import re
 
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
@@ -28,6 +29,10 @@ def validate_password(password: str) -> bool:
     - at least one digit
     - at least one special character
     """
+    pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\"#$%&\'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~!])(.{8,})$"
+    if re.match(pattern, password):
+        return True
+    return False
 
 def validate_username(username: str) -> bool:
     """
@@ -36,6 +41,8 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
+
+
 def save_user_info(username: str, password: str) -> None:
     database_path = "./Database/users.csv"
     """
