@@ -52,8 +52,7 @@ def validate_username(username: str) -> bool:
     return False
 
 
-def save_user_info(username: str, password: str) -> None:
-    database_path = "./Database/users.csv"
+def save_user_info(username, password, database_path="./Database/user_data.csv"):
     """
     Save the user's information to a file.
     hints:
@@ -65,11 +64,12 @@ def save_user_info(username: str, password: str) -> None:
     if os.path.exists(database_path):
         with open(database_path, "r") as file:
             existing_users = file.readlines()
-        
+
         for user in existing_users:
             if username in user:
-                print(colored("This user already exists!", "red"))
+                print("This user already exists!")
                 return
+
     with open(database_path, "a") as file:
         file.write(f"{username},{password}\n")
 
