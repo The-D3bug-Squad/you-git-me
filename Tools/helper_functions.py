@@ -89,8 +89,7 @@ def save_user_info(username: str, password: str) -> None:
     - ensure theres no duplicates
     """
     with open(database_path, "a") as f:
-        f.seek(0)
-        
+    
         reader = csv.reader(f)
         for row in reader:
             if row == [username, password]:
