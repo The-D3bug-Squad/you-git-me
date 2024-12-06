@@ -10,17 +10,17 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    return pwinput.pwinput(prompt, mask = "*")
+    password = pwinput.pwinput(prompt, mask = "*")
 
-password = get_password("Enter your password: ")
+    return password
     
 def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
-    return input(prompt)
+    username = input(prompt)
 
-username = get_username("Enter your username: ")
+    return username 
     
 def validate_password(password: str) -> bool:
     """
