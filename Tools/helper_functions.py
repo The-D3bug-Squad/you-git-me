@@ -5,6 +5,7 @@ import re
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
 
+
 def get_password(prompt: str) -> str:
     """
     Get a password from the user.
@@ -12,12 +13,14 @@ def get_password(prompt: str) -> str:
     password = pwinput.pwinput(prompt)
     return password
 
+
 def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
     username = input(prompt)
     return username
+
 
 def validate_password(password: str) -> bool:
     """
@@ -34,6 +37,7 @@ def validate_password(password: str) -> bool:
         return True
     return False
 
+
 def validate_username(username: str) -> bool:
     """
     Validate a username.
@@ -41,6 +45,10 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
+    pattern = r"^[a-zA-Z0-9]{3,}$"
+    if re.match(pattern, username):
+        return True
+    return False
 
 
 def save_user_info(username: str, password: str) -> None:
@@ -56,5 +64,5 @@ def save_user_info(username: str, password: str) -> None:
 
 
 if __name__ == "__main__":
-    #use to test the functions
+    # use to test the functions
     pass
