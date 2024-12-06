@@ -2,6 +2,8 @@ import pwinput
 import re
 from termcolor import colored
 import csv
+import os
+import getpass
 
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
@@ -10,8 +12,8 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    prompt = input("Enter your password: ")
-    return prompt
+    return getpass.getpass(prompt)
+password = get_password("Enter your password: ")
 
 def get_username(prompt: str) -> str:
     """
@@ -43,7 +45,7 @@ def validate_username(username: str) -> bool:
     - no alphanumeric characters
     """
     if len(username) >= 3:
-        if re.match(r'^[^a-zA-Z0-9]*$', username):  
+        if re.match(r'^[a-zA-Z0-9]*$', username):  
             return True
     return False
     
@@ -57,8 +59,27 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-# with open('users.csv', mode = 'r') as file:
-#     csvFile = csv.reader(file)
+   # Ensure the database directory exists
+    os.makedirs(os.path.dirname(database_path), exist_ok=True)
+    
+    # Check for duplicates
+    exists = False
+    if os.path.isfile(database_path):
+        with open(database_path, mode='r', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if row and row[0] == username:  # Assuming username is in the first column
+                    exists = True
+                    break
+    
+    if exists:
+        print("Username already exists.")
+        return
+    
+    # Append new user info if no duplicates found
+    with open(database_path, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([username, password])  # Save username and password
 
 
 if __name__ == "__main__":
