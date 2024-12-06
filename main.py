@@ -10,7 +10,17 @@ from Tools.helper_functions import (
 
 def main():
     # implement logic for the program to work correctly use given functions you implemented
-    pass
+    username = get_username("Enter your username: ")
+    if not validate_username(username):
+        print("Invalid username.")
+        return
+    
+    password = get_password("Enter your password: ")
+    if not validate_password(password):
+        print("Invalid password.")
+        return
+    
+    save_user_info(username, password)
 
 
 if __name__ == "__main__":
