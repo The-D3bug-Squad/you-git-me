@@ -5,8 +5,7 @@ def get_password(prompt: str) -> str:
     password = pwinput.pwinput(prompt); return password
 
 def get_username(prompt: str) -> str:
-    username = input(prompt)
-    return username
+    username = input(prompt); return username
 
 def validate_password(password: str) -> bool:
     if len(password) < 8: return False
