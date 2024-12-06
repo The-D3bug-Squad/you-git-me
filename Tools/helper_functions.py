@@ -1,6 +1,7 @@
 import pwinput
 from termcolor import colored
 import re
+import os
 
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
@@ -61,6 +62,16 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
+    if os.path.exists(database_path):
+        with open(database_path, "r") as file:
+            existing_users = file.readlines()
+        
+        for user in existing_users:
+            if username in user:
+                print(colored("This user already exists!", "red"))
+                return
+    with open(database_path, "a") as file:
+        file.write(f"{username},{password}\n")
 
 
 if __name__ == "__main__":
