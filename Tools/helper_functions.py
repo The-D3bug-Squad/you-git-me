@@ -8,6 +8,8 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
+    password = pwinput.pwinput(prompt)
+    return password
 
 def get_username(prompt: str) -> str:
     """
