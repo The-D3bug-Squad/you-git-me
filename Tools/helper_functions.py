@@ -10,21 +10,15 @@ def get_password(prompt: str) -> str:
     Get a password from the user.
     """
 
-    try:
-        password = pwinput.pwinput(prompt=prompt)
-        return password
-    except:
-        return 
+    password = pwinput.pwinput(prompt=prompt)
+    return password
 
 def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
-    try:
-        username = input(prompt)
-        return username
-    except:
-        return
+    username = input(prompt)
+    return username
 
 def validate_password(password: str) -> bool:
     """
@@ -36,29 +30,24 @@ def validate_password(password: str) -> bool:
     - at least one digit
     - at least one special character
     """
-    if len(password) >= 8:
-        upper = 0
-        lower = 0
-        digit = 0
-        special = 0
-        for char in password:
-            if char.isupper():
-                upper += 1
-            elif char.islower():
-                lower += 1
-            elif char.isdigit():
-                digit += 1
-            else:
-                if char.isalnum():
-                    continue
-                else:
-                    special += 1
-        if upper > 0 and lower > 0 and digit > 0 and special > 0:
-            return True
-        else:
+    length = len(password) < 8
+    lower = password.islower()
+    upper = password.isupper()
+    alnum = password.isalnum()
+
+    validation = not length and not lower and not upper and not alnum
+
+    match validation:
+        case True:
+            digit = 0
+            for char in password:
+                if char.isdigit():
+                    digit += 1
+            return digit > 0
+        case False:
             return False
-    else:
-        return False 
+    
+
 
 def validate_username(username: str) -> bool:
     """
@@ -67,15 +56,15 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
-    if len(username) >= 3:
-        for char in username:
-            if char.isalnum():
-                continue
-            else:
-                return False
-        return True
-    else:
-        return False
+
+    length = len(username) >= 3
+    alnum = username.isalnum()
+    validation = (length and alnum) == True
+    match validation:
+        case True:
+            return True
+        case False:
+            return False
     
 database_path = "./Database/users.csv"
 
@@ -84,7 +73,7 @@ def get_reader():
         with open(database_path, "r") as f:
             reader = csv.reader(f)
             return list(reader)
-    except Exception as e:
+    except FileNotFoundError:
         error = colored(f"Failed to get data from database", "red")
         print(error)
         return
@@ -112,8 +101,8 @@ def save_user_info(username: str, password: str) -> None:
             file.write(f"{info}\n")
             result = colored("You have been successfully added to the database", "green")
             print(result)
-    except Exception as e:
-        error = colored(f"Failed to add to database : {e}", "red")
+    except FileNotFoundError:
+        error = colored(f"Failed to add to database", "red")
         print(error)
 
 if __name__ == "__main__":
