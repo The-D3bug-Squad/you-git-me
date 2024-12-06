@@ -42,10 +42,10 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
-    if len(username) >= 3 and username != re.search(r'[@!~`-]', username):
-        return True
-    else:
-        return False
+    if len(username) >= 3:
+        if re.match(r'^[^a-zA-Z0-9]*$', username):  
+            return True
+    return False
     
 def save_user_info(username: str, password: str) -> None:
     database_path = "./Database/users.csv"
@@ -57,8 +57,8 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-with open('users.csv', mode = 'r') as file:
-    csvFile = csv.reader(file)
+# with open('users.csv', mode = 'r') as file:
+#     csvFile = csv.reader(file)
 
 
 if __name__ == "__main__":
