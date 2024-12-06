@@ -3,7 +3,7 @@ import re
 from termcolor import colored
 import csv
 import os
-import getpass
+
 
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
@@ -12,8 +12,10 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    return getpass.getpass(prompt)
-password = get_password("Enter your password: ")
+
+    password = pwinput.pwinput(prompt)
+    return password
+
 
 def get_username(prompt: str) -> str:
     """
