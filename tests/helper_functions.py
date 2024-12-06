@@ -17,7 +17,7 @@ def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
-    user_username = input(prompt= prompt)
+    user_username = pwinput.pwinput(prompt= prompt)
     return user_username
 
 def validate_password(password: str) -> bool:
@@ -110,8 +110,7 @@ def save_user_info(username: str, password: str) -> None:
             write_into_file.writerow(data)
     except FileNotFoundError:
         print("File was not found")
-        
+
 if __name__ == "__main__":
     #use to test the functions
-    #save_user_info("Nkuli","Scelos")
     pass
