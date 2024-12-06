@@ -3,11 +3,11 @@ from unittest.mock import patch
 import os
 
 # Assuming your functions are defined in a file named `user_functions.py`
-from Tools.helper_functions import get_password, get_username, validate_password, validate_username, save_user_info
+from Tools.user_functions import get_password, get_username, validate_password, validate_username, save_user_info
 
 class TestUserFunctions(unittest.TestCase):
 
-    @patch("user_functions.pwinput.pwinput", return_value="securePassword123!")
+    @patch("Tools.user_functions.pwinput.pwinput", return_value="securePassword123!")
     def test_get_password(self, mock_input):
         result = get_password("Enter your password: ")
         self.assertEqual(result, "securePassword123!")
@@ -38,9 +38,9 @@ class TestUserFunctions(unittest.TestCase):
         def mock_save_user_info(username, password):
             save_user_info(username, password)
 
-        with patch("user_functions.open", unittest.mock.mock_open()) as mock_file:
+        with patch("Tools.user_functions.open", unittest.mock.mock_open()) as mock_file:
             mock_save_user_info("user123", "Password123!")
-            mock_file.assert_called_once_with("user_data.csv", "a")
+            mock_file.assert_called_once_with("./Database/users.csv", "a")
             handle = mock_file()
             handle.write.assert_called_once_with("user123,Password123!\n")
 
