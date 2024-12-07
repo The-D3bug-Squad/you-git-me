@@ -53,9 +53,15 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
-    
-    return len(username) >= 3 and not any(char.isalnum() for char in username)
-    
+   
+    if len(username) <= 3:
+        return False
+
+    for char in username:
+        if char.isalnum() == False: 
+            return False
+        
+    return True
 
 def save_user_info(username: str, password: str) -> None:
     database_path = "./Database/users.csv"
