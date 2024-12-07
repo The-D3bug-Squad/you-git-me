@@ -8,18 +8,21 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    password = pwinput.pwinput(prompt, mask="🙈")
-
-
-    return password
+    try: 
+        password = pwinput.pwinput(prompt)
+        return password
+    except:
+        print(colored("Invalid input", "red"))
 
 def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
-    username = input(prompt)
-
-    return username
+    try: 
+        username = input(prompt)
+        return username
+    except:
+        print(colored("Invalid input", "red"))
 
 def validate_password(password: str) -> bool:
     """
