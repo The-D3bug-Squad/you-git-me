@@ -90,13 +90,13 @@ def save_user_info(username: str, password: str) -> None:
     """
     try:
         if not os.path.exists(test_file):
-            with open(test_file, mode="a", newline=" ") as file:
+            with open(test_file, mode="a", newline="") as file:
                 csvwriter = csv.writer(file)
-                csvwriter.writerow(f"{username},{password}")
+                csvwriter.writerow(f"{username},{password}\n")
                 print(colored("Username and password saved succesfully", "green"))
 
         else:
-            with open(test_file, mode="r", newline=" ") as file:
+            with open(test_file, mode="r", newline="") as file:
                 csvreader = csv.reader(file)
                 for row in csvreader:
                     if row[0] == username:
