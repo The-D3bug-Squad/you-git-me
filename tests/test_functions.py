@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch
 import os
+import sys
+sys.path.append('./Tools')
 
 # Assuming your functions are defined in a file named `user_functions.py`
 from Tools.helper_functions import get_password, get_username, validate_password, validate_username, save_user_info
