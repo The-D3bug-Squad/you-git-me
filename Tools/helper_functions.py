@@ -41,7 +41,7 @@ def validate_password(password: str) -> bool:
     upper_case = any(char.isupper() for char in password)
     lower_case = any(char.islower() for char in password)
     digit = any(char.isdigit() for char in password)
-    special_char = any(char.isalnum() for char in password)
+    special_char = any(not char.isalnum() for char in password)
 
     return valid_length and upper_case and lower_case and digit and special_char
 
