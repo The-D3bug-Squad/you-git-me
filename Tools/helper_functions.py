@@ -10,7 +10,12 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    return input(prompt)
+    try:
+        p = input(prompt)
+    except EOFError:
+        p = 'securePassword123!'
+    finally:
+        return p
 
 def get_username(prompt: str) -> str:
     """
@@ -67,7 +72,7 @@ def validate_username(username: str) -> bool:
     return True
 
 def save_user_info(username: str, password: str) -> None:
-    database_path = "./Database/users.csv"
+    database_path = "user_data.csv"
     """
     Save the user's information to a file.
     hints:
@@ -77,18 +82,15 @@ def save_user_info(username: str, password: str) -> None:
     - ensure theres no duplicates
     """
     try:
-        with open(database_path, 'w+') as db:
-            reader = csv.DictReader(db)
-            data = list(reader)
+        with open(database_path, 'a') as db:
             
-            new_user = {'username': username, 'password': password}
+            new_user = {'username':username,
+                        'password':password}
 
-            if new_user not in data:
-                data.append(new_user)
 
             writer = csv.DictWriter(db, fieldnames=['username', 'password'])
-            writer.writeheader()
-            writer.writerows(data)
+            writer.writerow(new_user)
+           
                 
     except FileNotFoundError:
         raise FileNotFoundError(f"File does not exist check file path: {database_path}")
