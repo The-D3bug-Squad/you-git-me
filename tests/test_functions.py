@@ -42,7 +42,7 @@ class TestUserFunctions(unittest.TestCase):
             mock_save_user_info("user123", "Password123!")
             mock_file.assert_called_once_with("user_data.csv", "a")
             handle = mock_file()
-            handle.write.assert_called_once_with("user123,Password123!\n")
+            handle.write.assert_called_once_with("user123,Password123!\r\n")
 
 if __name__ == "__main__":
     unittest.main()
