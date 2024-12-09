@@ -1,16 +1,19 @@
 from Tools.helper_functions import get_password, get_username, validate_password, validate_username, save_user_info
 
-
 def main():
     #implement logic for the program to work correctly use given functions you implemented
-    name = get_username("Enter your username: ")
-    password = get_password("Enter your password: ")
+    username = get_username("Enter your username: ")
+    while not validate_username(username):
+            print("Invalid username.")
+            username = get_username("Enter your username: ")
 
-    #Validating username, password and saving them to our database
-    if validate_username(name) and validate_password(password):
-        save_user_info(name, password)
-    else:
-        print("Enter a proper username or a strong password")
+    password = get_password("Enter your password: ")
+    while not validate_password(password):
+            print("Invalid password.")
+            password = get_password("Enter your password: ")
+    
+    save_user_info(username, password)
+    print("User information was succesfully saved")
 
 if __name__ == "__main__":
     main()

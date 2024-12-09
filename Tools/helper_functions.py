@@ -29,19 +29,20 @@ def validate_password(password: str) -> bool:
     - at least one special character
     """
     if len(password) < 8:
-        print("Password must be at least 8 characters long.")
+        print(colored("Password must be at least 8 characters long.", "red"))
         return False
+    
     if not any(char.isdigit() for char in password):
-        print("Password must contain at least one digit.")
+        print(colored("lPassword must contain at least one digit.", "red"))
         return False
     if not any(char.isupper() for char in password):
-        print("Password must contain at least one uppercase letter.")
+        print(colored("Password must contain at least one uppercase letter.", "red"))
         return False
     if not any(char.islower() for char in password):
-        print("Password must contain at least one lowercase letter.")
+        print(colored("Password must contain at least one lowercase letter.", "red"))
         return False
-    if not any(char in '!@#$%^&*()' for char in password):
-        print("Password must contain at least one special character (!@#$%^&*()).")
+    if not any(char in '!@#$%^&\'\'\"\"*()' for char in password):
+        print(colored("Password must contain at least one special character (!@#$%^&*()).", "red"))
         return False
     return True
 
@@ -54,10 +55,10 @@ def validate_username(username: str) -> bool:
     - no alphanumeric characters
     """
     if len(username) < 3:
-        print("Username must be at least 3 characters long.")
+        print(colored("Username must be at least 3 characters long.", "red"))
         return False
     if not username.isalnum():
-        print("Username must only contain letters and numbers.")
+        print(colored("Username must only contain letters and numbers.","red"))
         return False
     return True
 
@@ -75,7 +76,7 @@ def save_user_info(username: str, password: str) -> None:
         with open("users.csv", 'a') as file:
             
            file.write(f"{username},{password}\n")
-        print("User information saved successfully!")
+        print(colored("User information saved successfully!", "green"))
     except FileNotFoundError:
         print(f"{database_path} not found")
     
