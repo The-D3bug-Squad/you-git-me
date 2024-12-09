@@ -7,7 +7,7 @@ from Tools.helper_functions import get_password, get_username, validate_password
 
 class TestUserFunctions(unittest.TestCase):
 
-    @patch("helper_functions.pwinput.pwinput", return_value="securePassword123!")
+    @patch("Tools.helper_functions.pwinput.pwinput", return_value="securePassword123!")
     def test_get_password(self, mock_input):
         result = get_password("Enter your password: ")
         self.assertEqual(result, "securePassword123!")
@@ -38,11 +38,11 @@ class TestUserFunctions(unittest.TestCase):
         def mock_save_user_info(username, password):
             save_user_info(username, password)
 
-        with patch("helper_functions.open", unittest.mock.mock_open()) as mock_file:
+        with patch("Tools.helper_functions.open", unittest.mock.mock_open()) as mock_file:
             mock_save_user_info("user123", "Password123!")
             mock_file.assert_called_once_with("user_data.csv", "a")
             handle = mock_file()
-            handle.write.assert_called_once_with("user123,Password123!\n")
+            handle.write.assert_called_once_with("user123,Password123!\r\n")
 
 if __name__ == "__main__":
     unittest.main()
