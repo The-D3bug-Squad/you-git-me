@@ -38,26 +38,34 @@ def validate_password(password: str) -> bool:
     - at least one digit
     - at least one special character
     """
-    if len(password) < 8:
-        return False
+    length = False
+    digit = False
+    upper = False
+    lower = False 
+    special = False
+
+    if len(password) >= 8:
+        length = True
     
     for i in password:
-        if not i.isdigit():
-            return False
+        if i.isdigit():
+            digit = True
     
     for i in password:
-        if not i.isupper():
-            return False
+        if i.isupper():
+            upper = True
     
     for i in password:
-        if not i.islower():
-            return False
+        if i.islower():
+            lower = True
 
     special_characters = "~!@#$%^&*()_+{.}[]|\\:;\"'<,>?-/"
-    space = [" "]
     for i in password:
-        if not i in special_characters or i not in space:
-            return False
+        if i in special_characters:
+            special = True
+
+    return length and digit and upper and lower and special
+
     
 def validate_username(username: str) -> bool:
     """
@@ -89,23 +97,19 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-    username = get_username()
-    password = get_password()
-
     user = {username : password}
 
     if os.path.exists(database_path):
         os.remove(database_path)
 
     try:
-        with open(database_path,"a", newline=" ") as file:
-            writer = csv.DictWriter(file)
-            writer.writerow(user)
+        fieldnames = ["username", "password"]
+        with open(database_path,"w", newline=" ") as file:
+            file.write(user)
     except Exception as e:
-        print(f"Errir: {e}")
-        return 
+        print(f"Error: {e}")
+        return None
 
 
 if __name__ == "__main__":
     #use to test the functions
-    
