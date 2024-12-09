@@ -177,7 +177,7 @@ def save_user_info(username: str, password: str) -> None:
     try:
         with open(database_path,"a") as file:
             info = f"{username},{password}"
-            file.write(f"{info}\r\n`")
+            file.write(f"{info}\r\n")
             result = colored("You have been successfully added to the database", "green")
             print(result)
             
