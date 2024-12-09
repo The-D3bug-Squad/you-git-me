@@ -1,5 +1,4 @@
 import pwinput
-from termcolor import colored
 import string
 
 # try and accept accordingly to make a program that will not crash
@@ -94,6 +93,10 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
+    with open("user_data.csv", 'a') as f:
+        file = f.write(f'{username},{password}\n')
+        
+        
 
 
 
