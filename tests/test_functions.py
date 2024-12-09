@@ -40,7 +40,7 @@ class TestUserFunctions(unittest.TestCase):
 
         with patch("Tools.helper_functions.open", unittest.mock.mock_open()) as mock_file:
             mock_save_user_info("user123", "Password123!")
-            mock_file.assert_called_once_with("user_data.csv", "a")
+            mock_file.assert_called_once_with("./Database/users.csv", "a")
             handle = mock_file()
             handle.write.assert_called_once_with("user123,Password123!\n")
 

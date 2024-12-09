@@ -2,7 +2,7 @@ import pwinput
 import re
 from termcolor import colored
 import csv
-import os
+
 
 
 # try and accept accordingly to make a program that will not crash
@@ -39,13 +39,9 @@ def validate_password(password: str) -> bool:
     
     else:
         return False
+    
+database_path = "./Database/users.csv"
    
-def reader(usern):
-    database_path = "user_data.csv"
-
-    with open(database_path, 'a') as file:
-    file.write(username, password)
-    file.write('\n')
 
 def validate_username(username: str) -> bool:
     """
@@ -58,6 +54,13 @@ def validate_username(username: str) -> bool:
         if re.match(r'^[a-zA-Z0-9]*$', username):  
             return True
     return False
+def reader():
+
+    with open(database_path, 'r') as file:
+        read_file = csv.reader(file)
+        return list(read_file)
+    
+read_file = reader()
 
 def save_user_info(username: str, password: str) -> None:
    
@@ -69,27 +72,21 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-   # Ensure the database directory exists
-    #os.makedirs(os.path.dirname(database_path), exist_ok=True)
-    
-    # Check for duplicates
-    exists = False
-    if os.path.exists(database_path):
-        with open(database_path, mode='r', newline='') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if row and row[0] == username:  # Assuming username is in the first column
-                    exists = True
-                    break
-    
-    if exists:
-        print("Username already exists.")
-        return
-    
-    # Append new user info if no duplicates found
-   
-        # writer.writerow([username, password])  # Save username and password
+    for line in read_file:
+        if [username, password] == line:
+            msg = colored("Username and password already exists",'red')
+            print(msg)
+            return
+    try:
+        with open(database_path, 'a') as file:
+            data_info = f"{username},{password}"
+            file.write(f"{data_info}\n")
+            result = colored("You have been successfully added to the database", "green")
+            print(result)
 
+    except Exception as e:
+        error_msg = colored(f"Failed to add to database : {e}", 'red')
+        print(error_msg)
 
 if __name__ == "__main__":
     #use to test the functions
