@@ -7,9 +7,7 @@ on:
   pull_request: # Trigger on pull requests
     branches:
       - '*'       # Matches any branch
-  create: # Trigger when a new branch is created
-    branches:
-      - '*'       # Matches any branch
+  
 
 jobs:
   test:
