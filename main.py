@@ -3,7 +3,7 @@
 
 def main():
     #implement logic for the program to work correctly use given functions you implemented
-    pass
+    print('hello,world')
 
 
 
