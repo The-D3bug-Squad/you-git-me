@@ -91,7 +91,7 @@ def save_user_info(username: str, password: str) -> None:
     """
 
     with open('user_data.csv', 'a') as f:
-        f.write('user123,Password123!\n')
+        f.write(f'{username},{password}\n')
 # f.write(username,password)
 
 if __name__ == "__main__":
