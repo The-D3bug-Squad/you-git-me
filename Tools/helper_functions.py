@@ -90,6 +90,9 @@ def save_user_info(username: str, password: str) -> None:
     - ensure theres no duplicates
     """
 
+    with open('user_data.csv', 'a') as f:
+        f.write('user123,Password123!\n')
+# f.write(username,password)
 
 if __name__ == "__main__":
     #use to test the functions
