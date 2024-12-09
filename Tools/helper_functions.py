@@ -39,6 +39,14 @@ def validate_password(password: str) -> bool:
     
     else:
         return False
+   
+def reader(usern):
+    database_path = "user_data.csv"
+
+    with open(database_path, 'a') as file:
+    file.write(username, password)
+    file.write('\n')
+
 def validate_username(username: str) -> bool:
     """
     Validate a username.
@@ -50,9 +58,9 @@ def validate_username(username: str) -> bool:
         if re.match(r'^[a-zA-Z0-9]*$', username):  
             return True
     return False
-    
+
 def save_user_info(username: str, password: str) -> None:
-    database_path = "./Database/users.csv"
+   
     """
     Save the user's information to a file.
     hints:
@@ -62,11 +70,11 @@ def save_user_info(username: str, password: str) -> None:
     - ensure theres no duplicates
     """
    # Ensure the database directory exists
-    os.makedirs(os.path.dirname(database_path), exist_ok=True)
+    #os.makedirs(os.path.dirname(database_path), exist_ok=True)
     
     # Check for duplicates
     exists = False
-    if os.path.isfile(database_path):
+    if os.path.exists(database_path):
         with open(database_path, mode='r', newline='') as file:
             reader = csv.reader(file)
             for row in reader:
@@ -79,11 +87,11 @@ def save_user_info(username: str, password: str) -> None:
         return
     
     # Append new user info if no duplicates found
-    with open(database_path, mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([username, password])  # Save username and password
+   
+        # writer.writerow([username, password])  # Save username and password
 
 
 if __name__ == "__main__":
     #use to test the functions
+    #save_user_info('naledi', 'password123')
     pass
