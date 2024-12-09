@@ -1,6 +1,6 @@
 import pwinput
 from termcolor import colored
-import csv
+
 
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
@@ -9,16 +9,16 @@ def get_password(prompt: str) -> str:
     """
     Get a password from the user.
     """
-    password = pwinput.pwinput("Enter your password: ")
-    print(password)
+    password = pwinput.pwinput(prompt)
+    return password
     
 
 def get_username(prompt: str) -> str:
     """
     Get a username from the user.
     """
-    username = pwinput.pwinput("Enter your username: ")
-    print(username)
+    username = input(prompt)
+    return username
 
 def validate_password(password: str) -> bool:
     """
@@ -65,13 +65,14 @@ def validate_username(username: str) -> bool:
     """
     
     if len(username) < 3:
-        length=False
+        return False
 
-    for char in username:
-        if char.isalnum():
-         return False
+    # for char in username:
+    elif not username.isalnum():
+        return False
         
-    return True
+    else:
+        return True
 
     
 def save_user_info(username: str, password: str) -> None:
@@ -84,17 +85,16 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
-    with open('./Database/users.csv','r')as csv_files:
-        csv_reader=csv_reader(csv_files)
+    with open('user_data.csv', 'a')as csv_files:
+        csv_files.write(f"{username},{password}\n")
+    # with open('./Database/users.csv','w')as csv_files:
+    #     csv_writer=csv_writer(csv_files)
 
-    with open('./Database/users.csv','w')as csv_files:
-        csv_writer=csv_writer(csv_files)
-
-        for users in csv_files:
-            if username,password not in csv_files:
-                csv_files.append(username)
-            if password not in csv_files:
-                csv_files.append(password)
+    #     for users in csv_files:
+    #         if username not in csv_files:
+    #             csv_files.append(username)
+    #         if password not in csv_files:
+    #             csv_files.append(password)
         
 
 
