@@ -72,7 +72,7 @@ def save_user_info(username: str, password: str) -> None:
     Save the user's information to a file.
     Appends the username and password to the file (ensuring no duplicates).
     """
-    database_path = "./Database/user_data.csv"
+    database_path = "user_data.csv"
     
     try:
         with open(database_path, "a") as file:
