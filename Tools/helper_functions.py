@@ -1,22 +1,21 @@
-# import pwinput
+import pwinput
 # from termcolor import colored
 import re
 
 # try and accept accordingly to make a program that will not crash
 # learn what the type hints are and how to use them e.g. -> str, -> bool, -> int
 
-def get_password() :
+def get_password(prompt) :
     """
     Get a password from the user.
     """
-    password=input("Enter your password: ")
+    password=pwinput.pwinput(prompt)
     return password
-
-def get_username():
+def get_username(prompt):
     """
     Get a username from the user.
     """
-    username=input("Enter your username: ")
+    username=input(prompt)
     return username
 
 
@@ -55,13 +54,17 @@ def validate_username(username: str) -> bool:
     - at least 3 characters
     - no alphanumeric characters
     """
-    if len(username)<3:
-        return False
-    if re.findall(r'[a-z0-9]',username,re.IGNORECASE):
+    # if len(username)<3:
+    #     return False
+    # if not username.isalnum():
+    #     return False
+    # return True
+    if len(username)>=3 and username.isalnum():
         return True
+    return False
     
 def save_user_info(username: str, password: str) -> None:
-    database_path = "./Database/users.csv"
+    database_path = "user_data.csv"
     """
     Save the user's information to a file.
     hints:
@@ -70,6 +73,8 @@ def save_user_info(username: str, password: str) -> None:
     - append the username and password to the file
     - ensure theres no duplicates
     """
+    with open(database_path,'a') as csv:
+        csv.write(f'{username},{password}\n')
 
 
 if __name__ == "__main__":
