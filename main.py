@@ -20,6 +20,7 @@ def main():
     # Save the user information to a file (only valid data reaches this point)
     save_user_info(username, password)
     print("User information saved successfully!")
+    print("test push")
 
 if __name__ == "__main__":
     main()
